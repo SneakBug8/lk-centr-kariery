@@ -1,0 +1,957 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)https://e.mospolytech.ru/old/index.php?p=projects -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Личный кабинет обучающегося и сотрудника Московского Политеха</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
+  <meta name="viewport" content="height=device-height, width=device-width initial-scale=1.0, user-scalable=yes">
+
+  <link rel="stylesheet" href="reset.css" type="text/css" media="all">
+  <link rel="stylesheet" href="style.css?8" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/styles.css" type="text/css" media="all">
+
+  <link rel="stylesheet" href="reveal.css">
+  <link rel="stylesheet" href="jquery.ui.all.css">
+
+  <script async="" src="https://mc.yandex.ru/metrika/tag.js"></script>
+  <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+
+  <!-- script type="text/javascript" src="js/jquery-1.7.2.min.js"></script -->
+
+  <script type="text/javascript" src="js/adm.js"></script>
+  <script language="javascript" type="text/javascript" src="js/jquery_dev.js"></script>
+  <script language="javascript" type="text/javascript" src="js/jquery.timers.js"></script>
+  <script language="javascript" type="text/javascript" src="js/jquery.scrollFollow.js"></script>
+  <script type="text/javascript" src="js/message.js"></script>
+
+
+  <script type="text/javascript" src="js/jquery.reveal.js?4"></script>
+
+  <script type="text/javascript">
+    (function ($) {
+
+      $(function () {
+        var e = $(".scrollTop");
+        var speed = 500;
+
+        e.click(function () {
+          $("html:not(:animated)" + (!$.browser.opera ? ",body:not(:animated)" : "")).animate({
+            scrollTop: 0
+          }, 500);
+          return false;
+        });
+
+        function show_scrollTop() {
+          ($(window).scrollTop() > 300) ? e.fadeIn(600): e.hide();
+        }
+        $(window).scroll(function () {
+          show_scrollTop()
+        });
+        show_scrollTop();
+      });
+
+    })(jQuery)
+  </script>
+  <link rel="stylesheet" type="text/css" href="message_default.css">
+  <style>
+    /*==================СТРЕЛКА=================================*/
+
+    .scrollTop {
+      background: url(img/arrows_up5.png) 0 0 no-repeat;
+      display: block;
+      width: 50px;
+      height: 50px;
+      position: fixed;
+      bottom: 10px;
+      left: 96%;
+      z-index: 2000;
+    }
+
+    .scrollTop:hover {
+      background-position: -50px 0;
+    }
+
+
+    #box_mes {
+      background: transparent url(img/transpx1.png);
+      position: absolute;
+      width: auto;
+      height: auto;
+      left: 0;
+      top: 0;
+      text-align: center;
+    }
+
+    #mes {
+      display: none;
+      padding: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      border-bottom: 2px solid #cecece;
+      border-bottom-style: dashed;
+      background-color: #ffffff;
+      font-size: 12px;
+    }
+
+    #mes p {
+      margin-bottom: 15px;
+      margin-top: 15px;
+    }
+
+    .box_cont {
+      background: #ffedbe;
+      border: 0 solid #00346e;
+      border-width: 0 1px;
+      padding: 10px 50px;
+    }
+
+    a.norm {
+      text-decoration: none;
+      border-bottom: 1px dashed;
+
+    }
+
+    .admm {
+      background: url(img/f3.jpg);
+      width: 100%;
+      height: 100px;
+      font-size: 27px;
+      text-align: center;
+      border-bottom: #36C 10px dashed;
+    }
+  </style>
+
+  <link type="text/css" href="jquery-ui-1.8.6.custom.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="highslide/highslide.css">
+  <script type="text/javascript" src="highslide/highslide.js"></script>
+  <script type="text/javascript">
+    hs.graphicsDir = 'highslide/graphics/';
+    hs.wrapperClassName = 'wide-border';
+  </script>
+
+  <script>
+    function getXmlHttp() {
+      var xmlhttp;
+      try {
+        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        try {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (E) {
+          xmlhttp = false;
+        }
+      }
+      if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
+        xmlhttp = new XMLHttpRequest();
+      }
+      return xmlhttp;
+    }
+
+
+
+    function getObject(id) {
+
+      if (document.getElementById) {
+        if (typeof id == "string")
+          return document.getElementById(id).style;
+        else
+          return id.style;
+      }
+
+      if (document.all) {
+        return document.all(id).style;
+      }
+
+      if (document.layers) {
+        return document.layers[did];
+      }
+
+    }
+
+    function hide_object(did) {
+      var object = getObject(did);
+      object.display = "none";
+    }
+
+    function show_object(did) {
+      var object = getObject(did);
+      object.display = "inline";
+    }
+
+    function toggle_object(did) {
+      var object = getObject(did);
+
+
+      if (object.display == "none") {
+        object.display = "inline";
+      } else {
+        object.display = "none";
+      }
+    }
+
+
+
+    function verifyEmail(div) {
+      $("#" + div).html('<i>отправка запроса...</i>');
+
+      var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+      xmlhttp.open('POST', 'assets/verifyEmail.php', true); // Открываем асинхронное соединение
+      xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+      xmlhttp.send("verify=1"); // Отправляем POST-запрос
+      xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+
+        if (xmlhttp.readyState == 4) { // Ответ пришёл
+          if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+
+            $("#" + div).html(xmlhttp.responseText);
+
+          } else {
+            $("#" + div).html("<i style='color:red'><b>ошибка</b></i>");
+          }
+        }
+
+
+
+      };
+
+
+
+
+    }
+  </script>
+
+  <!-- script type="text/javascript" src="js/cufon-yui.js"></script -->
+  <!-- script type="text/javascript" src="js/cufon-replace.js"></script -->
+  <!--script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script-->
+  <!--script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script-->
+  <!-- script type="text/javascript" src="js/script.js"></script -->
+  <!--[if lt IE 7]>
+       <link rel="stylesheet" href="ie/ie6.css" type="text/css" media="screen">
+       <script type="text/javascript" src="js/ie_png.js"></script>
+       <script type="text/javascript">
+          ie_png.fix('.png, footer, header nav ul li a, .nav-bg, .list li img');
+       </script>
+  <![endif]-->
+  <!--[if lt IE 9]>
+      <script type="text/javascript" src="js/html5.js"></script>
+    <![endif]-->
+  <style type="text/css">
+    .highslide img {
+      cursor: url(highslide/graphics/zoomin.cur), pointer !important;
+    }
+  </style>
+</head>
+
+<body id="page1">
+
+
+
+  <div id="mes">
+  </div>
+
+  <div style="background-color: #00bcd4; color: #fff; padding: 10px">
+    <div style="text-align: center">
+      <p>Уважаемые пользователи!</p>
+      <p>
+        Доступна <a href="/" style="color: #0d47a1">новая версия</a> личного
+        кабинета!
+      </p>
+    </div>
+  </div>
+
+
+
+  <div class="admm">
+    <div style="padding-top:40px;">Появились новые оповещения! <a href="?p=alerts">Читать →</a></div>
+  </div>
+
+  <div style="background-color:#03C; color:#FFF; padding:10px;">
+    <div style="text-align:center">
+      <div><a class="norm" href="#" onclick="$('#corsersamsg').toggle(30); return false">Оповещение Coursera for
+          Campus</a></div>
+      <div id="corsersamsg" style="display:none">
+
+        <p>Уважаемый Павел!</p>
+        <p>Напоминаем, чтобы получили приглашение, но не присоединились к программе Coursera for Campus.</p>
+        <p>Для присоединению к программе Вам необходимо пройти по ссылке в приглашении, направленному на Вашу
+          электронную почту, зарегистрироваться и выбрать курс для обучения. Вам предоставлен бесплатно доступ к одному
+          любому онлайн курсу на выбор, с сертификатом! Сертификат о прохождении курса станет отличным дополнением
+          Вашего портфолио, а также может быть зачтен как факультатив.</p>
+        <p>Для справки: Московский Политех в 2021 году официально заключил контракт с ведущей мировой онлайн-платформой
+          Coursera и приобрел более 5000 лицензий для своих обучающихся предоставляя возможность бесплатного
+          онлайн-обучения на открытых курсах от ведущих мировых университетов и индустриальных корпораций.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="wrap">
+    <!-- header -->
+    <header>
+      <div class="container">
+        <h1><a href="index.php">Личный кабинет обучающегося и сотрудника Московского Политеха</a></h1>
+      </div>
+    </header>
+    <div class="container">
+      <!-- aside -->
+      <aside>
+        <h3>КАТЕГОРИИ</h3>
+        <ul class="categories">
+
+
+
+
+
+
+
+
+
+          <li><span><a href="?p=alerts">Оповещения</a></span></li>
+          <li><span id="nmsg"><a href="?p=messages">Личные сообщения (24)</a></span></li>
+          <li><span><a href="?">Учетная карточка</a></span></li>
+
+
+          <li><span><a href="https://e.mospolytech.ru/#/electronic-interaction-agreement">Соглашение об электронном
+                взаимодействии</a></span></li>
+
+          <li><span><a href="?p=about">Персональная информация</a></span></li>
+          <li><span><a href="?p=vaccination">Вакцинация</a></span></li>
+
+          <li><span><a href="?p=hostel_recount">Перерасчет платы за проживание в общежитии</a></span></li>
+
+          <!-- li><span><a href="?p=coursera" style="color:red"><b>Онлайн-курсы на платформе Coursera</b></a></span></li -->
+          <!-- li><span><a href="?p=mailrupromo">Промо-акция от Mail.ru</a></span></li -->
+          <!-- li><span><a href="?p=anketa" style="color:red">Анкетирование</a></span></li -->
+          <!-- li><span><a href="?p=anketa_1course2019"  style="color:red">Анкета первокурсника</a></span></li -->
+          <!-- li><span><a href="?p=anketa_design2019"  style="color:purple">Опрос для бакалавров по направлению 54.03.01 «Дизайн»</a></span></li -->
+
+          <!-- li><span><a href="?p=anketa_career2019">Опрос по итогам Недели карьеры 2019</a></span></li -->
+          <li><span><a href="?p=anketa_onlineedu">Развитие онлайн-образования в Московском Политехе</a></span></li>
+
+          <li><span><a href="?p=anketa_studsreda">Анкета для оценки образовательного процесса и студенческой
+                среды</a></span></li>
+
+          <!-- li><span><a href="?p=net_terroru"  style="color:#900">Нет террору</a></span></li -->
+          <li><span><a href="?p=stud_blanks">Бланки заявлений</a></span></li>
+
+
+
+          <li><span><a href="?p=instructions">Инструкции, положения, правила</a></span></li>
+
+          <li><span><a href="?p=doclist">Ознакомление с документами</a></span></li>
+
+          <li><span><a href="?p=payments">Сведения об оплатах</a></span></li>
+
+          <!-- li><span><a href="?p=anketa_campuscard2019" style="color:purple">Опрос для первокурсников, не получивших кампусные карты</a></span></li -->
+          <!-- li><span><a href="?p=anketa_attestat2019" style="color:red">Консультации по академическим задолженностям</a></span></li -->
+          <!-- li><span><a href="?p=anketa_courses_1_2020" style="color:red">Курсы по математике и физике для первокурсников</a></span></l -->
+          <li><span><a href="?p=rasp">Расписания</a></span></li>
+          <li><span><a href="?p=marks">Успеваемость</a></span></li>
+          <li><span><a href="?p=stud_stats">Электронная зачетная книжка</a></span></li>
+          <li><span><a href="?p=projects">Проектная деятельность</a></span></li>
+          <li><span><a href="?p=phys">Журнал посещений по физкультуре</a></span></li>
+
+          <li><span><a href="?p=dpo" style="color:red">Прокачай свои скиллы!</a>(дополнительные образовательные курсы
+              для студентов)</span></li>
+          <li><span><a href="?p=group">Одногруппники</a></span></li>
+
+          <li><span><a href="?p=teachers">Преподаватели, сотрудники</a></span></li>
+
+          <li><span><a href="?p=sprav">Справки, заявления</a></span></li>
+
+
+
+
+
+          <li><span><a href="?p=myportfolio">Мое портфолио</a></span></li>
+          <li><span><a href="?p=portfolio">Электронные портфолио</a></span></li>
+          <li><span id="ntmsg"><a href="?p=job">Трудоустройство и практика</a></span></li>
+          <!-- li><span><a href="?p=superjob">Вакансии Superjob</a></span></li>
+              <li><span><a href="?p=hh">Вакансии HH.ru</a></span></li -->
+
+
+          <!-- li><span><a href="?p=stags">Международные стажировки</a></span></li -->
+          <!-- li><span><a href="?p=like">Оценка деятельности преподавателей</a></span></li -->
+          <li><span><a href="?p=oop">Образовательные программы</a></span></li>
+
+
+          <li><span><a href="?p=centers">Многофункциональный центр</a></span></li>
+
+
+          <li><span><a href="https://online.mospolytech.ru/course/view.php?id=7621" target="_blank">Электронная
+                библиотека Московского Политеха</a></span></li>
+          <li><span><a href="https://new.mospolytech.ru/obuchauschimsya/biblioteka/"
+                target="_blank">Библиотечно-информационный центр</a></span></li>
+          <li><span><a href="http://lib.elpol.ru" target="_blank">Электронный каталог библиотеки Электростальского
+                института</a></span></li>
+          <li><span><a href="?p=info">Полезная информация</a></span></li>
+          <!-- li><span><a href="?p=parents">Родителям</a></span></li -->
+          <!-- li><span><a href="?p=prep">Преподавателю</a></span></li -->
+          <li class="last"><span><a href="?p=contact">Обратная связь</a></span></li>
+
+
+        </ul>
+
+
+
+        <form action="" id="newsletter-form" method="post">
+          <fieldset id="login_fldset"
+            style="min-height:190px; background-size: cover; background-position: center center; margin-bottom:10px;">
+            <div class="rowElem">
+              <img src="https://e.mospolytech.ru/old/img/no_avatar.jpg" vspace="5" id="avatar"
+                style="max-height:70px; max-width:70px;">
+              <p style="color:#dddddd"><b>Иванов Иван Иванович</b></p>
+              <a href="?logout" class="fleft">Выход</a>
+            </div>
+          </fieldset>
+        </form>
+        <!-- h2>НОВОСТИ <span>ПОЛИТЕХА</span></h2>
+           <ul class="news" -->
+
+
+        <script>
+          function getNews() {
+            // (1) создать объект для запроса к серверу
+            var req = getXmlHttp();
+
+            // (2)
+            // span рядом с кнопкой
+            // в нем будем отображать ход выполнения
+            var statusElem = document.getElementById('umnews');
+
+            req.onreadystatechange = function () {
+              // onreadystatechange активируется при получении ответа сервера
+
+              if (req.readyState == 4) {
+                // если запрос закончил выполняться
+
+                statusElem.innerHTML = req.statusText; // показать статус (Not Found, ОК..)
+
+                if (req.status == 200) {
+                  // если статус 200 (ОК) - выдать ответ пользователю
+                  statusElem.innerHTML = req.responseText;
+                }
+                // тут можно добавить else с обработкой ошибок запроса
+              }
+
+            }
+
+            // (3) задать адрес подключения
+            req.open('GET', 'https://mospolytech.ru/lk_umnews.php', true);
+
+            // объект запроса подготовлен: указан адрес и создана функция onreadystatechange
+            // для обработки ответа сервера
+
+            // (4)
+            req.send(null); // отослать запрос
+
+            // (5)
+            statusElem.innerHTML = 'Загрузка новостей...';
+          }
+        </script>
+        <div id="umnews"></div>
+      </aside>
+      <!-- content -->
+      <div id="content">
+
+
+        <style>
+          input:checked+b {
+            font-size: 130%;
+            font-weight: bold;
+            color: #096;
+          }
+
+          .file-upload input[type="file"] {
+            opacity: 0;
+            width: 0px;
+            height: 0px;
+            /*display: none;  скрываем input file */
+
+          }
+
+          /* задаем стили кнопки выбора файла*/
+
+          .file-upload {
+            position: relative;
+            overflow: hidden;
+            width: 180px;
+            height: 30px;
+            background: #4169E1;
+            border-radius: 20px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 10px;
+
+          }
+
+          .file-upload:hover {
+
+            background: #1E90FF;
+
+          }
+
+          /* Растягиваем label на всю область блока .file-upload */
+
+          .file-upload label {
+
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+
+          }
+
+          /* стиль текста на кнопке*/
+
+          .file-upload span {
+
+            line-height: 30px;
+            font-weight: bold;
+
+          }
+
+
+          .upload_link {
+            text-decoration: none;
+            border-bottom: 1px dashed;
+            color: #03F;
+          }
+        </style>
+
+
+<script src="js/tip/jquery-1.7.1.min.js"></script>
+
+
+<script src="js/tip/hoverIntent.min.js"></script>
+<script src="js/tip/clickTip.js"></script>
+<link rel="stylesheet" href="js/tip/simpleTip.css" type="text/css">
+
+
+<script>
+  function getXmlHttp() {
+    var xmlhttp;
+    try {
+      xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+      try {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      } catch (E) {
+        xmlhttp = false;
+      }
+    }
+    if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
+      xmlhttp = new XMLHttpRequest();
+    }
+    return xmlhttp;
+  }
+
+
+
+  function showDescr(rid, pname) {
+
+    var cmnt = document.getElementById("prj_content3");
+    document.getElementById("prj_name3").innerHTML = pname;
+
+    cmnt.innerHTML = "Получение данных...";
+
+
+    cmnt.disabled = true;
+
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'pages/projects.php', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("act=showDescr&id=" + encodeURIComponent(rid)); // Отправляем POST-запрос
+    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+
+      if (xmlhttp.readyState == 4) { // Ответ пришёл
+        if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+
+          if (xmlhttp.responseText != "!error!") {
+
+            cmnt.innerHTML = xmlhttp.responseText;
+
+          } else {
+            alert('Ошибка получения данных!');
+            cmnt.value = '';
+            cmnt.disabled = false;
+          }
+
+        } else {
+          alert('Ошибка получения данных!');
+          cmnt.value = '';
+          cmnt.disabled = false;
+        }
+      }
+
+    };
+
+  }
+</script>
+
+
+
+<style>
+  .uploaded_sobesed a {
+    color: #096;
+    font-size: 150%;
+    padding: 7px;
+    font-weight: bold;
+
+  }
+
+  .uploaded_sobesed {
+    margin-bottom: 20px;
+
+  }
+
+  input:checked+span {
+    font-size: 130%;
+    color: blue;
+  }
+
+
+
+  .saveBtn {
+
+    width: 250px;
+    height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    border: #096 1px solid;
+    background-color: #A6F4BF;
+
+  }
+
+  .saveBtn:disabled {
+    color: #999;
+    background-color: #CCC;
+
+  }
+</style>
+<script>
+  function getXmlHttp() {
+    var xmlhttp;
+    try {
+      xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+      try {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      } catch (E) {
+        xmlhttp = false;
+      }
+    }
+    if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
+      xmlhttp = new XMLHttpRequest();
+    }
+    return xmlhttp;
+  }
+
+
+
+  function checkForm() {
+    obj = document.forms['dataForm'];
+
+    re = /^[\s]*$/i
+    re2 = /^[0-9a-z_\-\.]+@[0-9a-z_\.-]+\.[a-z]{2,}$/i
+
+    if (confirm('Уверены в своем выборе? Отменить данное действие уже будет нельзя.')) {
+      obj.save_form.disabled = true;
+      obj.save_form.value = "Сохранение...";
+      obj.submit();
+    }
+
+
+  }
+
+
+
+
+  function cancelSobesed(sid, pid) {
+
+    if (confirm("Отменить это собеседование?")) {
+      window.location.href = '?p=projects&cancel_sobesed=' + sid + "&cancel_sobesed_project=" + pid;
+
+    }
+
+
+  }
+
+
+  function doAgreePrevYear() {
+    var obj = document.forms["proj_cont"];
+
+    if (confirm('Вы уверены в Вашем выборе?')) {
+
+      obj.action.value = "project_accept";
+      obj.submit();
+    }
+
+  }
+
+
+  function doAgreeRecommended() {
+    var obj = document.forms["proj_rec"];
+
+    if (confirm('Вы уверены в Вашем выборе?')) {
+
+      obj.action.value = "project_accept";
+      obj.submit();
+    }
+
+  }
+
+  function doCancelPrevYear() {
+    var obj = document.forms["proj_cont"];
+
+    if (confirm('Вы уверены, что не хотите продолжать этот проект?')) {
+
+      obj.action.value = "project_decline";
+      obj.submit();
+    }
+
+  }
+
+
+
+  function doSelectSobesed(frm, sob) {
+    var obj = document.forms[frm];
+
+    if (confirm('Вы уверены в Вашем выборе?')) {
+
+      obj.tm.value = sob;
+      obj.submit();
+    }
+
+  }
+
+
+
+
+  function doAgreeSobesed(frm) {
+    var obj = document.forms[frm];
+
+    if (confirm('Вы уверены в Вашем выборе?')) {
+
+      obj.submit();
+    }
+
+  }
+</script>
+
+
+<style type="text/css">
+  .LockOff {
+    display: none;
+    visibility: hidden;
+  }
+
+
+
+  .LockOn {
+    display: block;
+    visibility: visible;
+    position: fixed;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    width: calc(100%);
+    height: calc(100%);
+    background-color: #ccc;
+    text-align: center;
+    top: 0%;
+    filter: alpha(opacity=75);
+    opacity: 0.95;
+
+  }
+</style>
+<p></p>
+<div id="skm_LockPane" class="LockOff"></div>
+
+
+<div id="myModal3" class="reveal-modal">
+  <p style="font-size:100%"><b>Описание проекта</b></p>
+  <h4 id="prj_name3">Название проекта</h4>
+  <hr size="1">
+  <br>
+  <div id="prj_content3" style="max-height:400px; height:300px; overflow-y:scroll;">
+  </div>
+  <!-- hr size="1">
+  <div style="padding-top:10px; display:block; width:100%;" align="right">
+    <div align="right" style="display:table-cell; width:300px; text-align:right">
+   <input type="button" name="cancel" value="Закрыть окно" style="padding:5px;" onclick="$('#myModal3').trigger('reveal:close'); return false;" /></div >
+    </div-->
+
+  <a class="close-reveal-modal">x</a>
+</div>
+
+<script>
+  function skm_LockScreen(str) {
+    var lock = document.getElementById('skm_LockPane');
+    if (lock)
+      lock.className = 'LockOn';
+
+    lock.innerHTML =
+      "<div style='position:fixed; top:40%; width:100%;' align='center'><span style='background-color:#FFF; padding:20px; border:#333 1px solid;'><img src='img/loading.gif' align='absmiddle'> " +
+      str + "</span></div>";
+
+  }
+
+  function skm_UnlockScreen() {
+    var lock = document.getElementById('skm_LockPane');
+    if (lock) lock.className = 'LockOff';
+
+  }
+
+
+
+
+  function checkFormData() {
+    if (window.FormData) {
+      return true;
+    } else {
+      // browser doesn't supports File API
+      return false;
+    }
+  }
+
+
+  function ajaxFileUpload(data, fname, fld) {
+
+
+    skm_LockScreen("Загрузка файла " + fname + "...");
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "upload_file_prj_sobesed.php", true);
+
+
+    xhr.addEventListener("load", function (e) {
+      xdata = xhr.responseText;
+      if (xdata != "!error!") {
+
+        saveSobesedFile(fld, xdata);
+
+        //skm_UnlockScreen();
+      } else {
+        alert('Ошибка загрузки файла');
+        skm_UnlockScreen();
+      }
+
+
+    });
+
+
+    xhr.send(data);
+  };
+
+
+  function uploadFile(fld) {
+    var form = document.getElementById('file_' + fld);
+
+
+    if (checkFormData()) {
+
+      $('#file_' + fld).click();
+
+
+      form.addEventListener("change", function (e) {
+        var fdata = new FormData();
+
+        // Optional. Append custom data.
+        var file = form.files;
+
+        //spn.innerHTML="Выбраны файлы ("+file.length+")";
+
+
+        for (i = 0; i < file.length; i++) {
+
+          fdata.append('file', file[i]);
+          fdata.append('folder', "files/prj_sobesed");
+          ajaxFileUpload(fdata, file[i].name, fld);
+        }
+
+        form.value = '';
+        //	spn.innerHTML="Выберите файл";
+
+        // Prevents the standard submit event
+        //  e.preventDefault();
+        return false;
+      }, false);
+    } else {
+
+      alert('Ваш браузер не поддерживает асинхронную загрузку файлов. Используйте современный браузер.')
+    }
+
+
+
+  }
+
+
+
+  function saveSobesedFile(rid, val) {
+
+    var lnk = document.getElementById('uploaded_' + rid);
+
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'pages/projects.php', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("act=saveSobesedFile&id=" + encodeURIComponent(rid) + "&val=" + encodeURIComponent(
+      val)); // Отправляем POST-запрос
+    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+
+      if (xmlhttp.readyState == 4) { // Ответ пришёл
+        if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+          if (xmlhttp.responseText == "!ok!") {
+
+            //alert('Файл загружен: '+val);
+
+            lnk.innerHTML = "<img src='img/ok.png'> <a href='files/prj_sobesed/" + val +
+              "' target='_blank'>Файл загружен</a> <img src='img/ok.png'>";
+
+            skm_UnlockScreen();
+          } else {
+            alert('Ошибка сохранения файла!');
+            skm_UnlockScreen();
+
+
+          }
+        } else {
+          alert('Ошибка сохранения файла!');
+          skm_UnlockScreen();
+
+        }
+      }
+
+
+    };
+
+  }
+</script>
+
+
+
+
+<style>
+  .btnYes {
+    color: #099;
+    font-weight: bold;
+  }
+
+
+  .btnNo {
+
+    color: #900;
+    font-weight: bold;
+  }
+</style>
